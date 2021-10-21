@@ -20,16 +20,33 @@
                 <form action="#" method="post">
                 <?php
 
+                  $showResults = false;
+
                   $survey = new Survey();
                   if ( isset( $_POST['lenguaje'] ) ) {
                     $survey->setOptionSelected( $_POST['lenguaje'] );
                     $survey->vote();
+
+                    $showResults = true;
                   }
 
                   // echo $survey->getTotalVotes();
 
+                  if ( $showResults ) {
+                    $lenguajes = $survey->showResults();
+
+                    echo '<h2>' . $survey->getTotalVotes() . '</h2>';
+
+                    foreach ($lenguajes as $lenguaje ) {
+                      $porcentaje = $survey->getPercentageVotes($lenguaje['votos']);
+                      
+                    }
+                  }
+
 
                   ?>
+
+
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="lenguaje" id="c" value="c" checked>
                         <label class="form-check-label" for="c">
