@@ -1,3 +1,6 @@
+<?php
+  include_once 'includes/survey.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,8 +18,20 @@
             <div class="col-7 mx-auto mt-3 bg-secondary text-white p-3 rounded">
                 <h2>¿Cuál es tu lenguaje de programación favorito?</h2>
                 <form action="#" method="post">
+                <?php
+
+                  $survey = new Survey();
+                  if ( isset( $_POST['lenguaje'] ) ) {
+                    $survey->setOptionSelected( $_POST['lenguaje'] );
+                    $survey->vote();
+                  }
+
+                  // echo $survey->getTotalVotes();
+
+
+                  ?>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="lenguaje" id=c" value="c" checked>
+                        <input class="form-check-input" type="radio" name="lenguaje" id="c" value="c" checked>
                         <label class="form-check-label" for="c">
                           C
                         </label>
@@ -48,6 +63,7 @@
 
                       <button type="submit" class="btn btn-primary">Votar</button>
                 </form>
+
             </div>
         </div>
     </div>
